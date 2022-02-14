@@ -1,0 +1,47 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        
+        HashMap<Character,Character> map1=new HashMap<>(); //store char of s and t
+         HashMap<Character,Boolean> map2=new HashMap<>(); // to check char of t is used or not
+
+        if(s.length()!=t.length())
+        {
+            return false;   //if length of string not same then return  
+        }
+        
+        for(int i=0;i<s.length();i++)
+        {
+            
+            char ch1=s.charAt(i);
+            char ch2=t.charAt(i);
+
+            
+            if(map1.containsKey(ch1)==true)  //jo map hoga wo ye condition ko parr hi nai karega
+            {
+                if(map1.get(ch1)!=ch2)     //agar ch1 ch2 se map nai hai to return kar jao
+                {
+                    return false;
+                }
+            }
+            else{
+                
+                if(map2.containsKey(ch2)==true) 
+                {
+                    return false;  // ch2 mapped with ch1 but used already
+                }
+                
+                 else{
+                
+                map1.put(ch1,ch2); // agar sara cases pass ho gya to ch1 ch2 ko add kar do map mein
+                map2.put(ch2,true);// mark kar do ki ch2 used hai
+            }
+            }
+            
+           
+        }
+        
+        return true;  //koi bhi cases fail nai hua to return true kar dein 
+        // cases-1)same word should be not mapped with two different word bidirectionally(means from s->t and t->s)
+        
+    }
+}
